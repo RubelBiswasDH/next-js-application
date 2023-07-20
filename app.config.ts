@@ -1,0 +1,1 @@
+export const AUTOCOMPLETE_API = 'https://api.bmapsbd.com/search/autocomplete/web?search='
