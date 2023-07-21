@@ -7,13 +7,21 @@ const { Item } = Form
 const { Title, Text } = Typography
 const { Password } = Input
 
+// Import Hooks
+import { useAppDispatch } from '@/redux/store'
+
+// Import Actions and Methods
+import { login } from '@/redux/actions/authActions'
+
 const Login = () => {
+    const dispatch = useAppDispatch()
+
 	// Antd Use From Hook
 	const [ form ] = Form.useForm()
 
 	// On Form Submit
 	const _onSubmit = (data: any) => {
-		console.log({ data })
+		dispatch( login(data) )
 	}
 	// On Form Submit Error
 	const _onSubmitError = (err: any) => {
