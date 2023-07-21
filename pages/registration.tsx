@@ -2,19 +2,31 @@
 import Link from 'next/link'
 import { Form, Input, Button, Row, Col, Typography } from 'antd'
 import DebounceSearch from '@/components/common/DebounceSearch'
-import { MailOutlined } from '@ant-design/icons'
 
+// Import Hooks
+import { useAppDispatch } from '@/redux/store'
+
+// Import Actions and Utils
+import { registration } from '@/redux/actions/authActions'
+
+// Constants
 const { Item } = Form
 const { Title, Text } = Typography
 const { Password } = Input
 
 const Registration = () => {
+	const dispatch = useAppDispatch()
+	
 	// Antd Use From Hook
 	const [ form ] = Form.useForm()
 
 	// On Form Submit
-	const _onSubmit = (data: any) => {
-		console.log({ data })
+	const _onSubmit = (values: any) => {
+		const data = {
+			...values,
+			address: values?.address?.value ?? '' 
+		}
+		dispatch( registration(data) )
 	}
 	// On Form Submit Error
 	const _onSubmitError = (err: any) => {
@@ -23,7 +35,7 @@ const Registration = () => {
 
   return (
     <div className={ `bg-cover bg-center min-h-screen flex flex-row items-center justify-center lg:justify-end overflow-auto p-4 md:p-16 sm:p-8 xs:p-4 bg-[url('/images/login-bg.jpg')]` }>
-		<div className='p-4 bg-opacity-50 rounded-lg shadow-2xl md:p-8 lg:p-16 lg:w-1/2 md:w-2/3 sm:w-full bg-gradient-to-r from-green-20 to-green-10'>
+		<div className='p-4 bg-opacity-50 rounded-lg shadow-2xl md:p-8 lg:p-8 xl:p-16 lg:w-1/2 md:w-2/3 sm:w-full bg-gradient-to-r from-green-20 to-green-10'>
 			<Form
 				form={ form }
 				layout='vertical'
@@ -42,7 +54,6 @@ const Registration = () => {
 						<Item
 							label={ <Text>{ 'Name' }</Text> }
 							name='name'
-							hasFeedback={ true }
 							rules={[
 								{
 									required: true,
@@ -64,7 +75,6 @@ const Registration = () => {
 							]}
 						>
 							<Input
-								suffix={ <MailOutlined style={{ color: '#ACACAC' }} /> }
 								placeholder='Email'
 							/>
 						</Item>
@@ -106,19 +116,6 @@ const Registration = () => {
 							]}
 						>
 							<Password placeholder='Password' />
-						</Item>
-					</Col>
-					<Col span={ 12 } xs={ 24 } sm={ 12 }>
-						<Item
-							label={ <Text>{ 'Retype Password' }</Text> }
-							name='confirm_password'
-							hasFeedback={ true }
-							rules={[
-								{ required: true, message: 'Please retype your Password.' },
-								{ min: 6, message: 'Password must be at least 6 characters.' }
-							]}
-						>
-							<Password placeholder='Retype Password' />
 						</Item>
 					</Col>
 				</Row>
