@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run",
+    "e2e": "cypress open --e2e",
+    "e2e:headless": "cypress run --e2e",
+    "component": "cypress open --component",
+    "component:headless": "cypress run --component"
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
@@ -34,6 +40,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
-    "@types/lodash": "^4.14.195"
+    "@types/lodash": "^4.14.195",
+    "cypress": "^12.17.2"
   }
 }
