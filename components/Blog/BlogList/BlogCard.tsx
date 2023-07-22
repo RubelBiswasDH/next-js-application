@@ -4,7 +4,7 @@ import Link from 'next/link'
 const BlogCard = ({ slug, image, title, author, date, duration }: any) => {
   return (
     <Link href={ slug ? `/blog/${ slug }` : '' }>
-        <div className={ 'flex flex-col rounded-3xl shadow-xl overflow-hidden w-64' }>
+        <div className={ 'flex flex-col rounded-3xl shadow-xl overflow-hidden w-64 h-full' }>
             <span className='w-full h-32 overflow-hidden'>
                 <img 
                     className='object-cover w-full h-full'

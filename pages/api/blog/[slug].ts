@@ -56,7 +56,7 @@ export default function handler(
     }
     const data = blogs?.find((b: any) => b?.slug === slug)
     if(data){
-        res.status(200).json(data)
+        return res.status(200).json(data)
     }
     return res.status(404).json({})
 }
