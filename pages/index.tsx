@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { Spin, Alert, Button, Space } from 'antd'
+import { Alert, Button, Space } from 'antd'
+import Loader from '@/components/common/Loader'
 
 // Import Hooks
 import { useRouter } from 'next/router'
@@ -24,9 +25,7 @@ export default function Home() {
   }, [])
 
   if(!isAuthenticated || isAuthenticating){
-    return <div className='flex items-center justify-center h-full min-w-full'>
-      <Spin />
-    </div>
+    return <Loader />
   }
 
   return (

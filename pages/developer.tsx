@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { Spin } from 'antd'
 import ProtectedRoute from '@/components/common/ProtectedRoute'
+import Loader from '@/components/common/Loader'
 
 // Import Hooks
 import { useRouter } from 'next/router'
@@ -24,9 +24,7 @@ export default function Home() {
   }, [])
 
   if(!isAuthenticated || isAuthenticating){
-    return <div className='flex items-center justify-center h-full min-w-full'>
-      <Spin />
-    </div>
+    return <Loader />
   }
 
   return (
