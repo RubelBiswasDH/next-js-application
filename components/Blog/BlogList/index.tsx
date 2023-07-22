@@ -1,17 +1,20 @@
 import React from 'react'
 import BlogCard from './BlogCard'
 
-export const BlogList = () => {
+export const BlogList = ({ blogs }: any) => {
   return (
-    <div>
-        <BlogCard
-            slug={ 'blog/slug-' }
-            image={ 'https://doimages.nyc3.cdn.digitaloceanspaces.com/002Blog/DOxPaperspace.svg' }
-            title={ 'Paperspace Joins DigitalOcean to Expand AI Capabilities' }
-            author={ 'Joe Rogan' }
-            date={ 'July 6, 2022' }
-            duration={ '3' }
-        />
+    <div className='flex flex-wrap justify-center w-full gap-8 p-12 align-top'>
+        { blogs?.map((b: any, idx: any) => (
+            <BlogCard
+                key={ idx }
+                slug={ b?.slug ?? '' }
+                image={ b?.urlToImage ?? '' }
+                title={ b?.title ?? '' }
+                author={ b?.author ?? ''}
+                date={ b?.publishedAt ?? '' }
+                duration={ '3' }
+            />
+        )) }
     </div>
   )
 }

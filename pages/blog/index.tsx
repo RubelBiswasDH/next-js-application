@@ -1,17 +1,23 @@
 import { useEffect } from 'react'
-import Link from 'next/link'
-import { Spin, Alert, Button, Space } from 'antd'
+import { Spin } from 'antd'
 import { BlogList } from '@/components/Blog/BlogList'
 
 // Import Hooks
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
+import type { GetServerSideProps } from 'next'
 
 // Import Actions and Utils
 import { isValidatedUser } from '@/redux/actions/authActions'
-import axios from 'axios'
 
-export default function Blog() {
+export const getServerSideProps: GetServerSideProps = async () => {
+    const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
+    const res = await fetch(`${ BASE_URL }/api/blogs`)
+    const blogs = await res.json()
+    return { props: { blogs } }
+  }
+
+export default function Blog({ blogs }: any) {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
@@ -23,13 +29,6 @@ export default function Blog() {
     if(!isVaildUser){
       router.push('/login')
     }
-    axios.get('/api/blogs')
-        .then((res: any) => {
-            console.log({ res })
-        })
-        .catch((err: any) => {
-            console.log({ err })
-        })
   }, [])
 
   if(!isAuthenticated || isAuthenticating){
@@ -42,7 +41,7 @@ export default function Blog() {
     <div
       className={`flex min-h-screen flex-col items-center justify-between`}
     >
-        <BlogList />
+        <BlogList blogs={ blogs } />
     </div>
   )
 }
