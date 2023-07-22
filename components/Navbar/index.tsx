@@ -34,18 +34,11 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div style={ containerStyles }>
+    <div className='flex flex-row items-center justify-center w-full bg-white'>
       <Row style={{ width: '100%' }} gutter={[ 0, 0 ]}>
         <Col 
           span={ 24 }
-          style={{ 
-            display: 'flex', 
-            flexDirection: 'row' as 'row', 
-            justifyContent: 'flex-end', 
-            alignItems: 'center',
-            gap: '16px',
-            padding: '0px 0px'
-          }}
+          className='flex flex-row items-center justify-end gap-4 px-4'
         >
           <span className='flex items-center justify-center'>
             <Text  className='flex items-center capitalize hover:uppercase'>
@@ -57,26 +50,12 @@ const Navbar = () => {
             onClick={ _onLogout }
             className='flex items-center'
           >
-            Logout
+            { 'Logout' }
           </Button>
         </Col>
       </Row>
     </div>
   )
 }
-
-// JSS Styles
-const containerStyles = {
-  display: 'flex',
-  width: '100%',
-  flexDirection: 'row' as 'row',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)',
-  padding: '32px 24px',
-  margin: '0px 0px',
-  backgroundColor: '#FFFFFF'
-}
-
 
 export default Navbar

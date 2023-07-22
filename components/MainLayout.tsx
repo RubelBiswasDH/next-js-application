@@ -9,7 +9,7 @@ const MainLayout = ({ children }: any) => {
 
   return (
     <div style={ containerStyles }>
-      <Layout hasSider>
+      <Layout>
         <Layout>
           <Header style={ headerStyles }>
             <Navbar />

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { Spin, Alert, Button, Space } from 'antd'
+import { BlogList } from '@/components/Blog/BlogList'
 
 // Import Hooks
 import { useRouter } from 'next/router'
@@ -9,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/store'
 // Import Actions and Utils
 import { isValidatedUser } from '@/redux/actions/authActions'
 
-export default function Home() {
+export default function Blog() {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
@@ -30,24 +31,10 @@ export default function Home() {
   }
 
   return (
-    <main
+    <div
       className={`flex min-h-screen flex-col items-center justify-between`}
     >
-      <Space direction="vertical">
-        <Alert
-          message=""
-          description="Read out latest blogs"
-          type="info"
-          action={
-            <Link href={ '/blog' }>
-              <Button size="small" type="link">
-                Here
-              </Button>
-            </Link>
-          }
-          closable
-        />
-      </Space>
-    </main>
+        <BlogList />
+    </div>
   )
 }
