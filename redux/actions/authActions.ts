@@ -33,10 +33,15 @@ export function login(user: any) {
                 const user = res?.data?.data ?? {}
                 const token = res?.data?.data?.token || ''
                 const msg: any = res?.data?.message ?? ''
-                localStorage.setItem('user', JSON.stringify(user))
-                setCookie('token', token)
-                message.success({ content: msg, key: key })
-                window.location.href = '/'
+                if(msg === 'Successfully Logged In'){
+                    localStorage.setItem('user', JSON.stringify(user))
+                    setCookie('token', token)
+                    message.success({ content: msg, key: key })
+                    window.location.href = '/'
+                } else {
+                    message.error({ content: msg, key: key })
+                }
+                
             })
             .catch(err => {
                 console.error(err)
