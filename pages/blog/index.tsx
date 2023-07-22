@@ -11,7 +11,7 @@ import type { GetServerSideProps } from 'next'
 import { isValidatedUser } from '@/redux/actions/authActions'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
+    const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://next-js-application-chi.vercel.app"
     const res = await fetch(`${ BASE_URL }/api/blogs`)
     const blogs = await res.json()
     return { props: { blogs } }

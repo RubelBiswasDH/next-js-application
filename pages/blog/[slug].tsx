@@ -3,7 +3,7 @@ import type { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: any) => {
     const { slug } = query
-    const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
+    const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://next-js-application-chi.vercel.app"
     const data = await fetch(`${ BASE_URL }/api/blog/${ slug }`)
     const blog = await data.json()
     return { props: { blog } }
