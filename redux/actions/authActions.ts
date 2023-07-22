@@ -1,7 +1,8 @@
 import axios from "axios"
 import { API, TOKEN } from '@/app.config'
 import { message } from "antd"
-import { setCookie } from "@/utils/utils"
+import { getCookie, setCookie, deleteCookie } from "@/utils/utils"
+import { setIsAuthenticated, setIsAuthenticating, setUser } from "../reducers/authReducer"
 
 // Register New User
 export const registration = (data: any) => {
@@ -35,10 +36,40 @@ export function login(user: any) {
                 localStorage.setItem('user', JSON.stringify(user))
                 setCookie('token', token)
                 message.success({ content: msg, key: key })
+                window.location.href = '/'
             })
             .catch(err => {
                 console.error(err)
                 message.error({ content: 'Failed to Login', key: key })
             })
+    }
+}
+
+// User Validation
+export const isValidatedUser = () => {
+    return (dispatch: any) => {
+        dispatch( setIsAuthenticating(true) )
+        const token = getCookie('token')
+        if(token){
+            dispatch( setIsAuthenticated(true) )
+            dispatch( setIsAuthenticating(false) )
+            return true
+        } else {
+            dispatch( setIsAuthenticated(false) )
+            dispatch( setIsAuthenticating(false) )
+            setUser(null)
+            localStorage.clear()
+            return false
+        }
+    }
+}
+
+// Logout
+export const logout = () => {
+    return (dispatch: any) => {
+        localStorage.clear()
+        deleteCookie('token')
+        dispatch( setUser(null) )
+        window.location.href = '/login'
     }
 }

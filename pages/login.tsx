@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 // Import Components
 import Link from 'next/link'
 import { Form, Input, Button, Row, Col, Typography } from 'antd'
@@ -8,13 +10,15 @@ const { Title, Text } = Typography
 const { Password } = Input
 
 // Import Hooks
+import { useRouter } from 'next/router'
 import { useAppDispatch } from '@/redux/store'
 
 // Import Actions and Methods
-import { login } from '@/redux/actions/authActions'
+import { login, isValidatedUser } from '@/redux/actions/authActions'
 
 const Login = () => {
-    const dispatch = useAppDispatch()
+	const router = useRouter()
+	const dispatch = useAppDispatch()
 
 	// Antd Use From Hook
 	const [ form ] = Form.useForm()
@@ -23,10 +27,18 @@ const Login = () => {
 	const _onSubmit = (data: any) => {
 		dispatch( login(data) )
 	}
+
 	// On Form Submit Error
 	const _onSubmitError = (err: any) => {
 		console.error(err)
 	}
+
+	useEffect(() => {
+		const isVaildUser = dispatch( isValidatedUser() )
+		if(isVaildUser){
+		router.push('/')
+		}
+	}, [])
 
   return (
     <div className={ `bg-cover bg-center min-h-screen flex flex-row items-center justify-center lg:justify-end overflow-auto p-4 md:p-16 sm:p-8 xs:p-4 bg-[url('/images/login-bg.jpg')]` }>
