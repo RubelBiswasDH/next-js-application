@@ -11,3 +11,11 @@ export const getCookie = (name: string) => {
 export const deleteCookie = (name: any) => {
     Cookies.remove(name)
 }
+
+export const isPermitted = () => {
+    const user = JSON.parse(localStorage.getItem('user') ?? '') || null
+    if( user && user?.email?.includes('dev')){
+        return true
+    }
+    return false
+}
