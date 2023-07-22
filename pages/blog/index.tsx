@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/store'
 
 // Import Actions and Utils
 import { isValidatedUser } from '@/redux/actions/authActions'
+import axios from 'axios'
 
 export default function Blog() {
   const router = useRouter()
@@ -22,6 +23,13 @@ export default function Blog() {
     if(!isVaildUser){
       router.push('/login')
     }
+    axios.get('/api/blogs')
+        .then((res: any) => {
+            console.log({ res })
+        })
+        .catch((err: any) => {
+            console.log({ err })
+        })
   }, [])
 
   if(!isAuthenticated || isAuthenticating){
