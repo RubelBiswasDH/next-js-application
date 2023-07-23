@@ -5,5 +5,6 @@ export const BASE_URL = 'https://app-area.bestu.com.bd/api/nextjs'
 
 export const API = {
     REGISTRATION: `${ BASE_URL }/user/registration`,
-    LOGIN: `${ BASE_URL }/user/login`
+    LOGIN: `${ BASE_URL }/user/login`,
+    PRODUCTS: `${ BASE_URL }/products`,
 }
